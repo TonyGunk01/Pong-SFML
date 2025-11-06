@@ -1,8 +1,9 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Header/Core/GameWindowManager.h"
+#include "../../Header/Core/GameWindowManager.h"
+#include "../../Header/Event/EventManager.h"
 
-int main() 
+int main()
 {
     // Create our window manager instance
     Core::GameWindowManager gameWindowManager;
@@ -10,8 +11,14 @@ int main()
     // Initialize the window
     gameWindowManager.initialize();
 
-    while (gameWindowManager.isGameRunning()) 
-    {
+    // Create the EventManager instance
+    EventManager eventManager;
+
+    while (gameWindowManager.isGameRunning()) {
+
+        // Poll and handle events
+        eventManager.pollEvents(gameWindowManager.getGameWindow());
+
         gameWindowManager.render();
     }
 
