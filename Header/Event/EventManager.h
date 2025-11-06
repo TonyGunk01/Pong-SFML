@@ -4,14 +4,17 @@
 
 using namespace sf;
 
-class EventManager {
+namespace EventM
+{
+	class EventManager 
+	{
+		private:
 
-private:
+		public:
+			void pollEvents(RenderWindow* game_window);
 
-public:
-	void pollEvents(RenderWindow* game_window);
+			bool isKeyPressed(sf::Keyboard::Key key);
 
-	bool isKeyPressed(sf::Keyboard::Key key);
-
-	bool isLeftMouseButtonClicked();
-};
+			bool isLeftMouseButtonClicked();
+	};
+}
