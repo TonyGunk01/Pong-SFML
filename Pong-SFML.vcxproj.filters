@@ -51,6 +51,9 @@
     <ClCompile Include="Source\Event\EventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Core\GameLoop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Core\GameWindowManager.h">
@@ -357,6 +360,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SFML\include\SFML\Audio\SoundStream.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Core\GameLoop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
