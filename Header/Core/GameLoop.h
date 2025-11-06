@@ -1,26 +1,30 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "GameWindowManager.h"
-#include "../Event/EventManager.h"
+#include "../../Header/Core/GameWindowManager.h"
+#include "../../Header/Event/EventManager.h"
+#include "../../Header/GamePlay/GamePlayManager.h"
 
 using namespace sf;
 using namespace Core;
-using namespace EventM;
+//using namespace Event;
 using namespace std;
+using namespace Gameplay;
 
 namespace Core
 {
 	class GameLoop
 	{
-		private:
-			GameWindowManager* game_window_manager;
-			EventManager* event_manager;
+	private:
+		GameWindowManager* game_window_manager;
+		EventManager* event_manager;
+		GameplayManager* gameplay_manager;
 
-		public:
-			void initialize();
-			bool isGameRunning();
-			void pollEvent();
-			void update();
-			void render();
+	public:
+		void initialize();
+
+		bool isGameRunning();
+		void pollEvent();
+		void update();
+		void render();
 	};
 }
