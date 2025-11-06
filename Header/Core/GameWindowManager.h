@@ -1,27 +1,27 @@
 #pragma once
+#include "../../Header/Core/GameWindowManager.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
 
-namespace Core 
-{
-    class GameWindowManager 
-    {
-        private:
-            int game_window_width = 1280;
-            int game_window_height = 720;
-            std::string game_title = "SFML-Pong!";
+namespace Core {
+    class GameWindowManager {
+    private:
+        int game_window_width = 1280;
+        int game_window_height = 720;
 
-            RenderWindow* game_window;
+        std::string game_title = "SFML-Pong";
 
-            void createGameWindow();
+        RenderWindow* game_window;
 
-        public:
-            void initialize();
-            RenderWindow* getGameWindow();
-            bool isGameRunning();
-            void render();
-			void clearGameWindow();
-			void displayGameWindow();
+    public:
+        void createGameWindow();
+
+        RenderWindow* getGameWindow();
+
+        void initialize();
+        bool isGameRunning();
+        void clearGameWindow();
+        void displayGameWindow();
     };
 }
