@@ -5,6 +5,7 @@
 #include "../../Header/Event/EventManager.h"
 #include "../../Header/Utility/TimeService.h"
 #include "../../Header/UI/UIService.h"
+#include <SFML/Graphics.hpp>
 
 using namespace Utility;
 using namespace EventM;
@@ -21,6 +22,8 @@ namespace Gameplay
 			float player2_position_x = 1210.0f;
 			float player2_position_y = 300.0f;
 
+
+
 			Ball* ball;
 			Paddle* player1;
 			Paddle* player2;
@@ -35,5 +38,7 @@ namespace Gameplay
 			GameplayManager(EventManager* manager);
 			void update();
 			void render(RenderWindow* game_window);
+			void UpdateScore();
+			void resetPlayers();
 	};
 }

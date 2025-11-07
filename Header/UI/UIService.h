@@ -12,6 +12,7 @@ namespace UI
 		private:
 			Font font;
 			Text left_score_text;
+			Text right_score_text;
 
 			string texture_path = "Assets/Fonts/Aloevera-OVoWO.ttf";
 
