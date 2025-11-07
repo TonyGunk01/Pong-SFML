@@ -6,12 +6,13 @@
 
 using namespace sf;
 using namespace Core;
-using namespace CoustomEvent;
+using namespace EventM;
 using namespace std;
 using namespace Gameplay;
 
 namespace Core 
 {
+
 	class GameLoop
 	{
 		private:
