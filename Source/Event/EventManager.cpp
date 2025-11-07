@@ -1,5 +1,6 @@
 #include "../../Header/Event/EventManager.h"
-namespace CoustomEvent 
+
+namespace EventM 
 {
 	void EventManager::pollEvents(RenderWindow* game_window) 
 	{
@@ -34,5 +35,4 @@ namespace CoustomEvent
 	{
 		return (sf::Mouse::isButtonPressed(sf::Mouse::Left));
 	}
-
 }

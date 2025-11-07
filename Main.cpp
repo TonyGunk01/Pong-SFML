@@ -9,7 +9,7 @@ using namespace Core;
 
 int main()
 {
-    CoustomEvent::EventManager eventManager;
+    EventM::EventManager eventManager;
     Core::GameWindowManager gameWindowManager;
     GameLoop* game_loop_manager = new GameLoop();
 
@@ -25,3 +25,4 @@ int main()
 
     return 0;
 }
+

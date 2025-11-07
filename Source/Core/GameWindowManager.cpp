@@ -1,4 +1,5 @@
 #include "../../Header/Core/GameWindowManager.h"
+
 namespace Core 
 {
 	void GameWindowManager::initialize() 

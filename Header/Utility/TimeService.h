@@ -3,11 +3,12 @@
 
 namespace Utility
 {
-	class TimeService
+	class TimeService 
 	{
 		private:
 			std::chrono::steady_clock::time_point previous_time;
 			float delta_time;
+
 			void updateDeltaTime();
 			float calculateDeltaTime();
 			void updatePreviousTime();

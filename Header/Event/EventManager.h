@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace sf;
 
-namespace CoustomEvent 
+namespace EventM 
 {
 	class EventManager 
 	{

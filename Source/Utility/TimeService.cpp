@@ -1,17 +1,16 @@
 #include "../../Header/Utility/TimeService.h"
 
-namespace Utility
+namespace Utility 
 {
 	void TimeService::initialize()
 	{
 		previous_time = std::chrono::steady_clock::now();
-		delta_time = 0.0f;
+		delta_time = 0;
 	}
 
 	float TimeService::calculateDeltaTime()
 	{
-		int delta = std::chrono::duration_cast<std::chrono::milliseconds>(
-			std::chrono::steady_clock::now() - previous_time).count();
+		int delta = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - previous_time).count();
 
 		return static_cast<float>(delta) / 1000000.0f;
 	}
