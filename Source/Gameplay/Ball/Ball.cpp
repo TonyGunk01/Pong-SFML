@@ -1,5 +1,9 @@
 #include "../../Header/Gameplay/Ball/Ball.h";
 
+using namespace sf;
+using namespace Utility;
+using namespace Sounds;
+
 namespace Gameplay 
 {
 	Ball::Ball()

@@ -2,6 +2,8 @@
 #include <SFML/Audio.hpp>
 #include <string>
 
+using namespace std;
+
 namespace Sounds
 {
     enum class SoundType
@@ -22,6 +24,9 @@ namespace Sounds
 
             static void Initialize();
             static void LoadSoundFromFile();
+
+			static const string bgmPath = "Assets/Sounds/Pong_bgm.mp3";
+			static float backgroundMusicVolume = 50.0f;
 
 
         public:
