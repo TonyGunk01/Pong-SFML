@@ -1,69 +1,68 @@
 #include "../../Header/Gameplay/GameplayManager.h"
 
-namespace Gameplay 
+namespace GamePlay 
 {
-	GameplayManager::GameplayManager(EventManager* manager)
+	GameplayManager::GameplayManager(Event::EventManager* manager) 
 	{
-		time_service = new TimeService();
-		time_service->initialize();
+		eventManager = manager;
+		timeService = new Utility::TimeService();
+		timeService->initialize();
+		uiService = new UI::UIService();
 		initialize();
-		boundary = new Boundary();
-		event_manager = manager;
 	}
 
 	void GameplayManager::initialize() 
 	{
 		ball = new Ball();
-		player1 = new Paddle(player1_position_x, player1_position_y);
-		player2 = new Paddle(player2_position_x, player2_position_y);
+		paddle1 = new Paddle(player1XPos, player1YPos);
+		paddle2 = new Paddle(player2XPos, player2YPos);
+		boundary = new Boundary();
 	}
 
-	void GameplayManager::render(RenderWindow* game_window)
+	void GameplayManager::updateScore() 
 	{
-		boundary->render(game_window);
-		ball->render(game_window);
-		player1->render(game_window);
-		player2->render(game_window);
-		ui_service->render(game_window);
-	}
-
-	void GameplayManager::update()
-	{
-		time_service->update();
-		ball->update(player1, player2, time_service);
-
-		player1->update(event_manager->isKeyPressed(Keyboard::W),
-			event_manager->isKeyPressed(Keyboard::S), time_service);
-
-		player2->update(event_manager->isKeyPressed(Keyboard::Up),
-			event_manager->isKeyPressed(Keyboard::Down), time_service);
-
-		UpdateScore();
-		ui_service->update();
-	}
-
-	void GameplayManager::UpdateScore()
-	{
-		if(ball -> isLeftCollisionOccured())
+		if (ball->isLeftCollisionOccured()) 
 		{
-			ui_service -> incrementPlayer2Score();
+			uiService->incrementPlayer2Score();
 			ball->updateLeftCollisionState(false);
 			resetPlayers();
 		}
 
-		if(ball -> isRightCollisionOccured())
+		if (ball->isRightCollisionOccured()) 
 		{
-			ui_service -> incrementPlayer1Score();
+			uiService->incrementPlayer1Score();
 			ball->updateRightCollisionState(false);
 			resetPlayers();
 		}
 	}
 
-	void GameplayManager::resetPlayers()
+	void GameplayManager::resetPlayers() 
 	{
-		player1->reset(player1_position_x, player1_position_y);
-		player2->reset(player2_position_x, player2_position_y);
+		paddle1->reset(player1XPos, player1YPos);
+		paddle2->reset(player2XPos, player2YPos);
 	}
 
+	void GameplayManager::update() 
+	{
+		timeService->update();
+		ball->update(paddle1, paddle2, timeService);
 
+		paddle1->update(eventManager->isKeyPressed(sf::Keyboard::W), 
+			eventManager->isKeyPressed(sf::Keyboard::S), timeService);
+
+		paddle2->update(eventManager->isKeyPressed(sf::Keyboard::Up), 
+			eventManager->isKeyPressed(sf::Keyboard::Down), timeService);
+
+		updateScore();
+		uiService->update();
+	}
+
+	void GameplayManager::render(sf::RenderWindow* window) 
+	{
+		boundary->render(window);
+		ball->render(window);
+		paddle1->render(window);
+		paddle2->render(window);
+		uiService->render(window);
+	}
 }

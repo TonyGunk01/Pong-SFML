@@ -1,57 +1,57 @@
-#include "../../Header/Gameplay/Boundary/Boundary.h"
+#include <../../Header/Gameplay/Boundary/Boundary.h>
 
-namespace Gameplay 
+namespace GamePlay 
 {
-	Boundary::Boundary()
+	Boundary::Boundary() 
 	{
+		createTopBoundary();
+		createBottomBoundary();
 		createLeftBoundary();
 		createRightBoundary();
-		createTopBoundary();
 		createCenterLine();
-		createBottomBoundary();
 	}
 
-	void Boundary::createLeftBoundary()
+	void Boundary::render(sf::RenderWindow* window) 
 	{
-		leftBoundary.setSize(Vector2f(vertical_boundary_width, vertical_boundary_height));
-		leftBoundary.setPosition(left_position_x, left_position_y);
-		leftBoundary.setFillColor(boundary_color);
+		window->draw(topBoundary);
+		window->draw(bottomBoundary);
+		window->draw(leftBoundary);
+		window->draw(rightBoundary);
+		window->draw(centerLine);
 	}
 
-	void Boundary::createTopBoundary()
+	void Boundary::createTopBoundary() 
 	{
-		topBoundary.setSize(Vector2f(horizontal_boundary_width, horizontal_boundary_height));
-		topBoundary.setPosition(top_position_x, top_position_y);
-		topBoundary.setFillColor(boundary_color);
+		topBoundary.setSize(sf::Vector2f(horizontalBoundaryWidth, horizontalBoundaryHeight));
+		topBoundary.setPosition(topXPos, topYPos);
+		topBoundary.setFillColor(boundaryColor);
 	}
 
-	void Boundary::createBottomBoundary()
+	void Boundary::createBottomBoundary() 
 	{
-		bottomBoundary.setSize(Vector2f(horizontal_boundary_width, horizontal_boundary_height));
-		bottomBoundary.setPosition(bottom_position_x, bottom_position_y);
-		bottomBoundary.setFillColor(boundary_color);
+		bottomBoundary.setSize(sf::Vector2f(horizontalBoundaryWidth, horizontalBoundaryHeight));
+		bottomBoundary.setPosition(bottomXPos, bottomYPos);
+		bottomBoundary.setFillColor(boundaryColor);
 	}
 
-	void Boundary::createCenterLine()
+	void Boundary::createLeftBoundary() 
 	{
-		centerLine.setSize(Vector2f(center_line_width, center_line_height));
-		centerLine.setPosition(center_line_position_x, center_line_position_y);
-		centerLine.setFillColor(boundary_color);
+		leftBoundary.setSize(sf::Vector2f(verticalBoundaryWidth, verticalBoundaryHeight));
+		leftBoundary.setPosition(leftXPos, leftYPos);
+		leftBoundary.setFillColor(boundaryColor);
 	}
 
-	void Boundary::createRightBoundary()
+	void Boundary::createRightBoundary() 
 	{
-		rightBoundary.setSize(Vector2f(vertical_boundary_width, vertical_boundary_height));
-		rightBoundary.setPosition(right_position_x, right_position_y);
-		rightBoundary.setFillColor(boundary_color);
+		rightBoundary.setSize(sf::Vector2f(verticalBoundaryWidth, verticalBoundaryHeight));
+		rightBoundary.setPosition(rightXPos, rightYPos);
+		rightBoundary.setFillColor(boundaryColor);
 	}
 
-	void Boundary::render(RenderWindow* game_window)
+	void Boundary::createCenterLine() 
 	{
-		game_window->draw(topBoundary);
-		game_window->draw(leftBoundary);
-		game_window->draw(centerLine);
-		game_window->draw(rightBoundary);
-		game_window->draw(bottomBoundary);
+		centerLine.setSize(sf::Vector2f(centerLineWidth, centerLineHeight));
+		centerLine.setPosition(centerLineXPos, centerLineYPos);
+		centerLine.setFillColor(centerLineColor);
 	}
 }

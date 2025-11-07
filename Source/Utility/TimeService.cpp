@@ -2,37 +2,37 @@
 
 namespace Utility 
 {
-	void TimeService::initialize()
+	void TimeService::initialize() 
 	{
-		previous_time = std::chrono::steady_clock::now();
-		delta_time = 0;
+		startTime = std::chrono::steady_clock::now();
+		deltaTime = 0.0f;
 	}
 
-	float TimeService::calculateDeltaTime()
-	{
-		int delta = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - previous_time).count();
-
-		return static_cast<float>(delta) / 1000000.0f;
-	}
-
-	void TimeService::updateDeltaTime()
-	{
-		delta_time = calculateDeltaTime();
-		updatePreviousTime();
-	}
-
-	void TimeService::updatePreviousTime()
-	{
-		previous_time = std::chrono::steady_clock::now();
-	}
-
-	void TimeService::update()
+	void TimeService::update() 
 	{
 		updateDeltaTime();
 	}
 
-	float TimeService::getDeltaTime()
+	float TimeService::getDeltaTime() 
 	{
-		return delta_time;
+		return deltaTime;
+	}
+
+	void TimeService::updateDeltaTime() 
+	{
+		deltaTime = calculateDeltaTime();
+		updateStartTime();
+	}
+
+	float TimeService::calculateDeltaTime() 
+	{
+		int delta = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - startTime).count();
+
+		return static_cast<float>(delta) / 1000000.0f;
+	}
+
+	void TimeService::updateStartTime() 
+	{
+		startTime = std::chrono::steady_clock::now();
 	}
 }

@@ -2,35 +2,30 @@
 #include <SFML/Audio.hpp>
 #include <string>
 
-using namespace std;
-
-namespace Sounds
+namespace Sound
 {
-    enum class SoundType
-    {
-        BALL_BOUNCE
-    };
+	enum class SoundType 
+	{
+		BALL_BOUNCE
+	};
 
-    class SoundManager
-    {
-        private:
-            static sf::Music backgroundMusic;
-            static sf::Sound soundEffect;
-            static sf::SoundBuffer ballBounce;
+	class SoundManager 
+	{
+		public:
+			static void Initialize();
+			static void PlaySoundEffect(SoundType soundType);
+			static void PlayBackgroundMusic();
 
-            static float backgroundMusicVolume;
-            static const std::string bgmPath;
-            static const std::string ballBouncePath;
+		private:
+			static sf::Music backgroundMusic;
+			static sf::Sound soundEffect;
+			static sf::SoundBuffer ballBounce;
 
-            static void Initialize();
-            static void LoadSoundFromFile();
+			static float backgroundMusicVolume;
+			static const std::string bgmPath;
+			static const std::string ballBouncePath;
 
-			static const string bgmPath = "Assets/Sounds/Pong_bgm.mp3";
-			static float backgroundMusicVolume = 50.0f;
+			static void LoadSoundFromFile();
 
-
-        public:
-            static void PlaySoundEffect(SoundType soundType);
-            static void PlayBackgroundMusic();
-    };
+	};
 }

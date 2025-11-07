@@ -4,32 +4,32 @@ namespace Core
 {
 	void GameWindowManager::initialize() 
 	{
-		game_window = new RenderWindow();
+		gameWindow = new sf::RenderWindow();
 		createGameWindow();
 	}
 
 	void GameWindowManager::createGameWindow() 
 	{
-		game_window->create(sf::VideoMode::getDesktopMode(), game_title, sf::Style::Default);
+		gameWindow->create(sf::VideoMode(gameWindowWidth, gameWindowHeight), gameWindowTitle, sf::Style::Default);
 	}
 
 	bool GameWindowManager::isGameRunning() 
 	{
-		return game_window->isOpen();
+		return gameWindow->isOpen();
 	}
 
-	void GameWindowManager::clearGameWindow()
+	void GameWindowManager::clearGameWindow() 
 	{
-		game_window->clear();
+		gameWindow->clear();
 	}
 
-	void GameWindowManager::displayGameWindow()
+	void GameWindowManager::displayGameWindow() 
 	{
-		return game_window->display();
+		gameWindow->display();
 	}
 
-	RenderWindow* GameWindowManager::getGameWindow() 
+	sf::RenderWindow* GameWindowManager::getGameWindow() 
 	{
-		return game_window;
+		return gameWindow;
 	}
 }

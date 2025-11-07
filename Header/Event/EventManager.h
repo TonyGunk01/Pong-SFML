@@ -1,15 +1,14 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <iostream>
-using namespace sf;
 
-namespace EventM 
+#include <SFML/Graphics.hpp>
+
+namespace Event 
 {
 	class EventManager 
 	{
 		public:
-			void pollEvents(RenderWindow* game_window);
-			bool isKeyPressed(Keyboard::Key key);
+			void pollEvents(sf::RenderWindow* gameWindow);
+			bool isKeyPressed(sf::Keyboard::Key key);
 			bool isLeftMouseButtonClicked();
 	};
 }

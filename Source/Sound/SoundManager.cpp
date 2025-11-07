@@ -1,55 +1,56 @@
 #include "../../Header/Sound/SoundManager.h"
+
 #include <iostream>
 
-using namespace sf;
-
-namespace Sounds
+namespace Sound 
 {
-    SoundBuffer SoundManager::ballBounce;
-    Sound SoundManager::soundEffect;
+	sf::SoundBuffer SoundManager::ballBounce;
+	sf::Sound SoundManager::soundEffect;
+	sf::Music SoundManager::backgroundMusic;
 
-    const std::string SoundManager::ballBouncePath = "Assets/Sounds/Ball_Bounce.wav";
+	const std::string SoundManager::ballBouncePath = "Assets/Sounds/Ball_Bounce.wav";
+	const std::string SoundManager::bgmPath = "Assets/Sounds/Pong_BGM.mp3";
+	float SoundManager::backgroundMusicVolume = 50.f;
 
-    void SoundManager::Initialize()
-    {
-        LoadSoundFromFile();
-    }
+	void SoundManager::PlaySoundEffect(SoundType soundType) 
+	{
+		switch (soundType) 
+		{
+			case SoundType::BALL_BOUNCE:
+				soundEffect.setBuffer(ballBounce);
+				break;
 
-    sf::Music SoundManager::backgroundMusic;
-    const std::string SoundManager::bgmPath = "Assets/Sounds/Pong_bgm.mp3";
-    float SoundManager::backgroundMusicVolume = 50.0f;
+			default:
+				std::cerr << "Invalid sound type" << std::endl;
+				break;
+		}
 
-    void SoundManager::LoadSoundFromFile()
-    {
-        if (!ballBounce.loadFromFile(ballBouncePath))
-            std::cerr << "Error loading sound file: " << ballBouncePath << std::endl;
+		soundEffect.play();
+	}
 
-        if (!backgroundMusic.openFromFile(bgmPath))
-        {
-            std::cerr << "Error loading background music file: " << bgmPath << std::endl;
-            return;
-        }
-    }
+	void SoundManager::PlayBackgroundMusic() 
+	{
+		backgroundMusic.setVolume(backgroundMusicVolume);
+		backgroundMusic.setLoop(true);
+		backgroundMusic.play();
+	}
 
-    void SoundManager::PlaySoundEffect(SoundType soundType)
-    {
-        switch (soundType)
-        {
-        case SoundType::BALL_BOUNCE:
-            soundEffect.setBuffer(ballBounce);
-            break;
-        default:
-            std::cerr << "Invalid sound type" << std::endl;
-            return;
-        }
+	void SoundManager::Initialize() 
+	{
+		LoadSoundFromFile();
+	}
 
-        soundEffect.play();
-    }
+	void SoundManager::LoadSoundFromFile() 
+	{
+		if (!backgroundMusic.openFromFile(bgmPath)) 
+		{
+			std::cerr << "Error loading sound file: " << bgmPath << std::endl;
+			return;
+		}
 
-    void SoundManager::PlayBackgroundMusic()
-    {
-        backgroundMusic.setVolume(backgroundMusicVolume);
-        backgroundMusic.setLoop(true);
-        backgroundMusic.play();
-    }
+		if (!ballBounce.loadFromFile(ballBouncePath)) 
+		{
+			std::cerr << "Error loading sound file: " << ballBouncePath << std::endl;
+		}
+	}
 }
