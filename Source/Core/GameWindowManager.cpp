@@ -1,40 +1,34 @@
 #include "../../Header/Core/GameWindowManager.h"
-#include <iostream>
+namespace Core 
+{
+	void GameWindowManager::initialize() 
+	{
+		game_window = new RenderWindow();
+		createGameWindow();
+	}
 
-namespace Core {
+	void GameWindowManager::createGameWindow() 
+	{
+		game_window->create(sf::VideoMode::getDesktopMode(), game_title, sf::Style::Default);
+	}
 
-    void GameWindowManager::initialize() {
-        // Allocate memory for the render window object
-        game_window = new RenderWindow();
-        // Set up the window with configured properties
-        createGameWindow();
-    }
+	bool GameWindowManager::isGameRunning() 
+	{
+		return game_window->isOpen();
+	}
 
-    void GameWindowManager::createGameWindow() {
-        game_window->create(
-            sf::VideoMode::getDesktopMode(),    // Get screen resolution
-            game_title,                        // Window title
-            sf::Style::Fullscreen               // Fullscreen mode
-        );
-    }
+	void GameWindowManager::clearGameWindow()
+	{
+		game_window->clear();
+	}
 
-    bool GameWindowManager::isGameRunning() {
-        // Return true if window is open, false if closed
-        return game_window->isOpen();
-    }
+	void GameWindowManager::displayGameWindow()
+	{
+		return game_window->display();
+	}
 
-    void GameWindowManager::clearGameWindow()
-    {
-        game_window->clear();
-    }
-
-    void GameWindowManager::displayGameWindow()
-    {
-        return game_window->display();
-    }
-
-    RenderWindow* GameWindowManager::getGameWindow() {
-        return game_window;
-    }
-
+	RenderWindow* GameWindowManager::getGameWindow() 
+	{
+		return game_window;
+	}
 }
