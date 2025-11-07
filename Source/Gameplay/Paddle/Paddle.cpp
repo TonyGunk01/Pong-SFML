@@ -35,4 +35,9 @@ namespace Gameplay
 	{
 		return paddle_sprite;
 	}
+
+	void Paddle::reset(float position_x, float position_y)
+	{
+		paddle_sprite.setPosition(position_x, position_y);
+	}
 }
