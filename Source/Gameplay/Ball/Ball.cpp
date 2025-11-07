@@ -76,21 +76,6 @@ namespace Gameplay
 		}
 	}
 
-	void Ball::handleOutofBoundCollision()
-	{
-		FloatRect ball_bounds = pong_ball_sprite.getGlobalBounds();
-
-		if (ball_bounds.left <= left_boundary)
-		{
-			reset(); //player 2 scores..
-		}
-
-		else if (ball_bounds.left + ball_bounds.width >= right_boundary)
-		{
-			reset(); //player 2 scores..
-		}
-	}
-
 	void Ball::reset()
 	{
 		pong_ball_sprite.setPosition(center_position_x, center_position_y);
@@ -119,6 +104,42 @@ namespace Gameplay
 			{
 				return;
 			}
+		}
+	}
+
+	bool Ball::isLeftCollisionOccured()
+	{
+		return had_left_collision;
+	}
+
+	void Ball::updateLeftCollisionState(bool value)
+	{
+		had_left_collision = value;
+	}
+
+	void Ball::updateRightCollisionState(bool value)
+	{
+		had_right_collision = value;
+	}
+
+	bool Ball::isRightCollisionOccured()
+	{
+		return had_right_collision;
+	}
+
+	void Ball::handleOutofBoundCollision()
+	{
+		FloatRect ball_bounds = pong_ball_sprite.getGlobalBounds();
+
+		if (ball_bounds.left <= left_boundary)
+		{
+			updateLeftCollisionState(true);
+			reset(); //player 2 scores..
+		}
+		else if (ball_bounds.left + ball_bounds.width >= right_boundary)
+		{
+			updateRightCollisionState(true);
+			reset(); //player 1 scores..
 		}
 	}
 }

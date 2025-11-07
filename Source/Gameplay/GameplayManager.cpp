@@ -24,6 +24,7 @@ namespace Gameplay
 		ball->render(game_window);
 		player1->render(game_window);
 		player2->render(game_window);
+		ui_service->render(game_window);
 	}
 
 	void GameplayManager::update()
@@ -36,5 +37,33 @@ namespace Gameplay
 
 		player2->update(event_manager->isKeyPressed(Keyboard::Up),
 			event_manager->isKeyPressed(Keyboard::Down), time_service);
+
+		UpdateScore();
+		ui_service->update();
 	}
+
+	void GameplayManager::UpdateScore()
+	{
+		if(ball -> isLeftCollisionOccured())
+		{
+			ui_service -> incrementPlayer2Score();
+			ball->updateLeftCollisionState(false);
+			resetPlayers();
+		}
+
+		if(ball -> isRightCollisionOccured())
+		{
+			ui_service -> incrementPlayer1Score();
+			ball->updateRightCollisionState(false);
+			resetPlayers();
+		}
+	}
+
+	void GameplayManager::resetPlayers()
+	{
+		player1->reset(player1_position_x, player1_position_y);
+		player2->reset(player2_position_x, player2_position_y);
+	}
+
+
 }

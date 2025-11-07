@@ -36,6 +36,9 @@ namespace Gameplay
 			const float top_boundary = 20.0f;
 			const float bottom_boundary = 700.0f;
 
+			bool had_left_collision = false;
+			bool had_right_collision = false;
+
 			const float left_boundary = 0.0f;
 			const float right_boundary = 1280.0f;
 
@@ -57,9 +60,16 @@ namespace Gameplay
 
 		public:
 			Ball();
+			bool isLeftCollisionOccured();
+			void updateLeftCollisionState(bool value);
+
+			bool isRightCollisionOccured();
+			void updateRightCollisionState(bool value);
+
 			void handlePaddleCollision(Paddle* player1, Paddle* player2);
 			void handleBoundaryCollision();
 			void handleOutofBoundCollision();
+
 			void reset();
 			void update(Paddle* player1, Paddle* player2, TimeService* time_server);
 			void render(RenderWindow* game_window);
