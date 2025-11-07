@@ -1,17 +1,15 @@
 #pragma once
-#include "../../Header/Event/EventManager.h"
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
 using namespace sf;
 
-class EventManager {
-
-private:
-
-public:
-	void pollEvents(RenderWindow* game_window);
-
-	bool isKeyPressed(sf::Keyboard::Key key);
-
-	bool isLeftMouseButtonClicked();
-};
+namespace CoustomEvent 
+{
+	class EventManager 
+	{
+		public:
+			void pollEvents(RenderWindow* game_window);
+			bool isKeyPressed(Keyboard::Key key);
+			bool isLeftMouseButtonClicked();
+	};
+}
