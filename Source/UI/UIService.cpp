@@ -1,44 +1,66 @@
 #include "../../Header/UI/UIService.h"
 
-namespace UI
+namespace UI 
 {
-	void UIService::loadFontTexture()
+	UIService::UIService() 
 	{
-		font.loadFromFile(texture_path);
+		initialize();
 	}
 
-	void UIService::createLeftScoreText()
+	void UIService::update() 
 	{
-		left_score_text.setFont(font);
-		left_score_text.setString(initial_string);
-		left_score_text.setCharacterSize(font_size);
-		left_score_text.setFillColor(font_color);
-		left_score_text.setPosition(left_score_position_x, left_score_position_y);
+		leftScoreText.setString(formatScore(player1Score));
+		rightScoreText.setString(formatScore(player2Score));
 	}
 
-	void UIService::render(RenderWindow* game_window)
+	void UIService::initialize() 
 	{
-		game_window->draw(left_score_text);
+		loadFontTexture();
+		createLeftScoreText();
+		createRightScoreText();
 	}
 
-	string UIService::formatScore(int score)
+	void UIService::render(sf::RenderWindow* window) 
 	{
-		return (score < 10) ? "0" + to_string(score) : to_string(score);
+		window->draw(leftScoreText);
+		window->draw(rightScoreText);
 	}
 
-	void UIService::incrementPlayer1Score()
+	void UIService::loadFontTexture() 
 	{
-		player1_score++;
+		font.loadFromFile(texturePath);
 	}
 
-	void UIService::incrementPlayer2Score()
+	void UIService::createLeftScoreText() 
 	{
-		player2_score++;
+		leftScoreText.setFont(font);
+		leftScoreText.setString(initialScore);
+		leftScoreText.setCharacterSize(fontSize);
+		leftScoreText.setFillColor(fontColor);
+		leftScoreText.setPosition(leftScoreXPos, leftScoreYPos);
 	}
 
-	void UIService::update()
+	void UIService::createRightScoreText() 
 	{
-		left_score_text.setString(formatScore(player1_score));
-		right_score_text.setString(formatScore(player2_score));
+		rightScoreText.setFont(font);
+		rightScoreText.setString(initialScore);
+		rightScoreText.setCharacterSize(fontSize);
+		rightScoreText.setFillColor(fontColor);
+		rightScoreText.setPosition(rightScoreXPos, rightScoreYPos);
+	}
+
+	std::string UIService::formatScore(int score) 
+	{
+		return (score < 10 ? "0" : "") + std::to_string(score);
+	}
+
+	void UIService::incrementPlayer1Score() 
+	{
+		player1Score++;
+	}
+
+	void UIService::incrementPlayer2Score() 
+	{
+		player2Score++;
 	}
 }

@@ -1,27 +1,28 @@
-#include "../../Header/Event/EventManager.h"
+#include <iostream>
+#include <../../Header/Event/EventManager.h>
 
-namespace EventM 
+namespace Event 
 {
-	void EventManager::pollEvents(RenderWindow* game_window) 
+	void EventManager::pollEvents(sf::RenderWindow* gameWindow) 
 	{
 		sf::Event event;
 
-		while (game_window->pollEvent(event)) 
+		while (gameWindow->pollEvent(event)) 
 		{
 			if (event.type == sf::Event::Closed) 
 			{
-				game_window->close();
+				gameWindow->close();
 			}
 
 			if (isKeyPressed(sf::Keyboard::Escape)) 
 			{
-				game_window->close();
+				gameWindow->close();
 			}
 
-			if (isLeftMouseButtonClicked())
+			if (isLeftMouseButtonClicked()) 
 			{
-				sf::Vector2i position = sf::Mouse::getPosition(*game_window);
-				std::cout << "Left mouse click at: " << position.x << ", " << position.y << std::endl;
+				sf::Vector2i mousePosition = sf::Mouse::getPosition(*gameWindow);
+				std::cout << "Left mouse button pressed at: " << mousePosition.x << ", " << mousePosition.y << std::endl;
 			}
 		}
 	}
@@ -31,8 +32,8 @@ namespace EventM
 		return sf::Keyboard::isKeyPressed(key);
 	}
 
-	bool EventManager::isLeftMouseButtonClicked()
+	bool EventManager::isLeftMouseButtonClicked() 
 	{
-		return (sf::Mouse::isButtonPressed(sf::Mouse::Left));
+		return sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	}
 }

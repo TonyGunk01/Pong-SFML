@@ -1,34 +1,38 @@
-#include "../../Header/Core/GameLoop.h"
+#include <../../Header/Core/GameLoop.h>
+
+#include "../../Header/Sound/SoundManager.h"
 
 namespace Core 
 {
-	void GameLoop::initialize()
+	void GameLoop::initialize() 
 	{
-		game_window_manager = new GameWindowManager();
-		event_manager = new EventManager();
-		gameplay_manager = new GameplayManager(event_manager);
-		game_window_manager->initialize();
+		gameWindowManager = new GameWindowManager();
+		eventManager = new Event::EventManager();
+		gameplayManager = new GamePlay::GameplayManager(eventManager);
+		Sound::SoundManager::Initialize();
+		Sound::SoundManager::PlayBackgroundMusic();
+		gameWindowManager->initialize();
 	}
 
-	bool GameLoop::isGameRunning()
+	bool GameLoop::isGameRunning() 
 	{
-		return game_window_manager->isGameRunning();
+		return gameWindowManager->isGameRunning();
 	}
 
-	void GameLoop::pollEvent()
+	void GameLoop::pollEvents() 
 	{
-		event_manager->pollEvents(game_window_manager->getGameWindow());
+		eventManager->pollEvents(gameWindowManager->getGameWindow());
 	}
 
-	void GameLoop::update()
+	void GameLoop::render() 
 	{
-		gameplay_manager->update();
+		gameWindowManager->clearGameWindow();
+		gameplayManager->render(gameWindowManager->getGameWindow());
+		gameWindowManager->displayGameWindow();
 	}
 
-	void GameLoop::render()
+	void GameLoop::update() 
 	{
-		game_window_manager->clearGameWindow();
-		gameplay_manager->render(game_window_manager->getGameWindow());
-		game_window_manager->displayGameWindow();
+		gameplayManager->update();
 	}
 }

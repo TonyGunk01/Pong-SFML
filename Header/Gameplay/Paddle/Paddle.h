@@ -1,36 +1,32 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "../../Header/Utility/TimeService.h"
+#include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/Graphics/RenderWindow.hpp"
+#include "../../Utility/TimeService.h"
 
-using namespace sf;
-using namespace Utility;
-
-namespace Gameplay 
+namespace GamePlay 
 {
 	class Paddle 
 	{
-		private:
-			RectangleShape paddle_sprite;
-
-			const float paddle_width = 20.0f;
-			const float paddle_height = 140.0f;
-
-			float paddle_speed = 1.0f;
-			float topBoundary = 20.0f;
-			float bottomBoundary = 700.0f;
-			int speedMultiplier = 10;
-
-			void createPaddle(float position_x, float position_y);
-			void movePaddle(bool move_up_key_pressed, bool move_down_key_pressed, TimeService* time_service);
-
 		public:
+			Paddle(float xPos, float yPos);
 
-			Paddle(float position_x, float position_y);
+			void update(bool moveUpKeyPressed, bool moveDownKeyPressed, Utility::TimeService* timeService);
+			void render(sf::RenderWindow* window);
 
-			RectangleShape getPaddleSprite();
-			void reset(float position_x, float position_y);
+			sf::RectangleShape getPaddleSprite();
+			void reset(float xPos, float yPos);
 
-			void update(bool move_up_key_pressed, bool move_down_key_pressed, TimeService* time_service);
-			void render(RenderWindow* game_window);
+		private:
+			void movePaddle(bool moveUpKeyPressed, bool moveDownKeyPressed, Utility::TimeService* timeService);
+
+			float speedMultiplier = 200.f;
+			const float paddleSpeed = 2.f;
+
+			sf::RectangleShape paddleSprite;
+			const float paddleWidth = 20.f;
+			const float paddleHeight = 140.f;
+
+			const float topBoundary = 20.f;
+			const float bottomBoundary = 700.f;
 	};
 }

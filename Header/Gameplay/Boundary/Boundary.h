@@ -1,60 +1,53 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "SFML/Graphics.hpp"
 
-using namespace sf;
-
-namespace Gameplay 
+namespace GamePlay 
 {
-	class Boundary
+	class Boundary 
 	{
+		public:
+			Boundary();
+			void render(sf::RenderWindow* window);
+
 		private:
-			RectangleShape topBoundary;
-			RectangleShape leftBoundary;
-			RectangleShape centerLine;
-			RectangleShape rightBoundary;
-			RectangleShape bottomBoundary;
-
-			//horizontal values for boundarys
-			const float horizontal_boundary_width = 1280.0f;
-			const float horizontal_boundary_height = 20.0f;
-
-			//vertical values for boundarys
-			const float vertical_boundary_width = 20.0f;
-			const float vertical_boundary_height = 720.0f;
-
-			const float right_position_x = 1260.0f;
-			const float right_position_y = 0.0f;
-
-			const float top_position_x = 0.0f;
-			const float top_position_y = 0.0f;
-
-			const float left_position_x = 0.0f;
-			const float left_position_y = 0.0f;
-
-			const float bottom_position_x = 0.0f;
-			const float bottom_position_y = 700.0f;
-
-			//Boundary Colors
-			const Color boundary_color = Color::Blue;
-			const Color center_line_color = Color::White;
-
-			//center lines properties
-			const float center_line_width = 10.0f;
-			const float center_line_height = 680.0f;
-			const float center_line_position_x = 640.0f;
-			const float center_line_position_y = 20.0f;
-
-			//create boundaries and the center line
 			void createTopBoundary();
 			void createBottomBoundary();
 			void createLeftBoundary();
 			void createRightBoundary();
-
 			void createCenterLine();
 
-		public:
-			Boundary();
-			void update();
-			void render(RenderWindow* game_window);
+		private:
+			const sf::Color boundaryColor = sf::Color::Blue;
+			const sf::Color centerLineColor = sf::Color::White;
+
+			sf::RectangleShape topBoundary;
+			sf::RectangleShape bottomBoundary;
+			sf::RectangleShape leftBoundary;
+			sf::RectangleShape rightBoundary;
+			sf::RectangleShape centerLine;
+
+			const float horizontalBoundaryWidth = 1280.f;
+			const float horizontalBoundaryHeight = 20.f;
+
+			const float verticalBoundaryWidth = 20.f;
+			const float verticalBoundaryHeight = 720.f;
+
+			const float centerLineWidth = 10.f;
+			const float centerLineHeight = 680.f;
+
+			const float topXPos = 0.f;
+			const float topYPos = 0.f;
+
+			const float bottomXPos = 0.f;
+			const float bottomYPos = 700.f;
+
+			const float leftXPos = 0.f;
+			const float leftYPos = 0.f;
+
+			const float rightXPos = 1260.f;
+			const float rightYPos = 0.f;
+
+			const float centerLineXPos = 640.f;
+			const float centerLineYPos = 20.f;
 	};
 }

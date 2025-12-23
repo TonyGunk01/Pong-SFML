@@ -1,41 +1,44 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <string>
 
-using namespace sf;
-using namespace std;
+#include "SFML/Graphics.hpp"
 
 namespace UI 
 {
 	class UIService 
 	{
-		private:
-			Font font;
-			Text left_score_text;
-			Text right_score_text;
-
-			string texture_path = "Assets/Fonts/Aloevera-OVoWO.ttf";
-
-			int font_size = 40;
-			Color font_color = Color::White;
-			string initial_string = "00";
-
-			float left_score_position_x = 570.0f;
-			float left_score_position_y = 30.0f;
-
-			float right_score_position_x = 670.0f;
-			float right_score_position_y = 30.0f;
-
-			int player1_score = 0;
-			int player2_score = 0;
-
 		public:
-			void loadFontTexture();
-			void createLeftScoreText();
-			void render(RenderWindow* game_window);
-			string formatScore(int score);
+			UIService();
+
+			void update();
+			void render(sf::RenderWindow* window);
+
 			void incrementPlayer1Score();
 			void incrementPlayer2Score();
-			void update();
+
+		private:
+			void initialize();
+			void loadFontTexture();
+			void createLeftScoreText();
+			void createRightScoreText();
+			std::string formatScore(int score);
+
+			sf::Font font;
+			sf::Text leftScoreText;
+			sf::Text rightScoreText;
+
+			std::string texturePath = "Assets/Fonts/Aloevera-OVoWO.ttf";
+
+			int fontSize = 40;
+			sf::Color fontColor = sf::Color::White;
+			std::string initialScore = "00";
+
+			float leftScoreXPos = 570.f;
+			float leftScoreYPos = 30.f;
+
+			float rightScoreXPos = 670.f;
+			float rightScoreYPos = 30.f;
+
+			int player1Score = 0;
+			int player2Score = 0;
 	};
 }

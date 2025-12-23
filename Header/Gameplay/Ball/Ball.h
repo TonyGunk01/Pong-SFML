@@ -1,77 +1,72 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "../../Header/Gameplay/Paddle/Paddle.h"
-#include "../../Header/Utility/TimeService.h"
+#include "../Paddle/Paddle.h"
+#include "SFML/Graphics.hpp"
 
-using namespace sf;
-using namespace std;
-
-namespace Gameplay 
+namespace GamePlay 
 {
 	enum class BallState 
 	{
-		Idel,
+		Idle,
 		Moving
 	};
 
 	class Ball 
 	{
-		private:
-			Texture pong_ball_texture;
-			Sprite pong_ball_sprite;
-
-			string texture_path = "Assets/Textures/Ball.png";
-			CircleShape ball_sprite;
-
-			const float scale_x = 0.02f;
-			const float scale_y = 0.02f;
-
-			const float radius = 10.0f;
-			const float position_x = 615.0f;
-			const float position_y = 335.0f;
-
-			float ball_speed = 0.5f;
-			Vector2f velocity = Vector2f(ball_speed, ball_speed);
-
-			const float top_boundary = 20.0f;
-			const float bottom_boundary = 700.0f;
-
-			bool had_left_collision = false;
-			bool had_right_collision = false;
-
-			const float left_boundary = 0.0f;
-			const float right_boundary = 1280.0f;
-
-			const float center_position_x = 615.0f;
-			const float center_position_y = 325.0f;
-
-			int speed_multiplier = 10;
-
-			float delay_duration = .1f;
-			float elapsed_delay_time = 0.0f;
-
-			BallState current_state;
-
-			void loadTexture();
-			void initializeVariables();
-			void move(TimeService* time_service);
-			void onCollision(Paddle* player1, Paddle* player2);
-			void updateDelayTime(float delta_time);
-
 		public:
 			Ball();
+
+			void update(Paddle* paddle1, Paddle* paddle2, Utility::TimeService* timeService);
+			void render(sf::RenderWindow* window);
+
 			bool isLeftCollisionOccured();
 			void updateLeftCollisionState(bool value);
 
 			bool isRightCollisionOccured();
 			void updateRightCollisionState(bool value);
 
-			void handlePaddleCollision(Paddle* player1, Paddle* player2);
-			void handleBoundaryCollision();
-			void handleOutofBoundCollision();
-
+		private:
+			void loadTexture();
+			void initializeVariables();
+			void move(Utility::TimeService* timeService);
+			void updateDelayTime(float deltaTime);
 			void reset();
-			void update(Paddle* player1, Paddle* player2, TimeService* time_server);
-			void render(RenderWindow* game_window);
+
+			void onCollision(Paddle* paddle1, Paddle* paddle2);
+			void handlePaddleCollision(Paddle* paddle1, Paddle* paddle2);
+			void handleBoundaryCollision();
+			void handelOutOfBoundCollision();
+
+			bool hadLeftCollision = false;
+			bool hadRightCollision = false;
+
+			float delayDuration = 1.f;
+			float elapsedTime = 0.f;
+
+			BallState currentState;
+
+			float speedMultiplier = 150.f;
+			float ballSpeed = 2.f;
+			sf::Vector2f velocity = sf::Vector2f(ballSpeed, ballSpeed);
+
+			sf::Texture pongBallTexture;
+			sf::Sprite pongBallSprite;
+			const std::string texturePath = "Assets/Textures/Ball.png";
+
+			const float scaleX = 0.06f;
+			const float scaleY = 0.06f;
+
+			sf::CircleShape ballSprite;
+			const float radius = 10.f;
+			const float xPos = 615.f;
+			const float yPos = 335.f;
+
+			const float topBoundary = 20.f;
+			const float bottomBoundary = 700.f;
+
+			const float leftBoundary = 0.f;
+			const float rightBoundary = 1280.f;
+
+			const float centerXPos = 615.f;
+			const float centerYPos = 325.f;
 	};
 }

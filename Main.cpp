@@ -1,28 +1,17 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include "../../Header/Core/GameWindowManager.h"
-#include "../../Header/Event/EventManager.h"
-#include "../../Header/Core/GameLoop.h"
+#include "Header/Core/GameLoop.h"
 
-using namespace sf;
-using namespace Core;
-
-int main()
+int main() 
 {
-    EventM::EventManager eventManager;
-    Core::GameWindowManager gameWindowManager;
-    GameLoop* game_loop_manager = new GameLoop();
+	Core::GameLoop gameLoop;
 
-    gameWindowManager.initialize();
-    game_loop_manager->initialize();
+	gameLoop.initialize();
 
-    while (game_loop_manager->isGameRunning()) 
-    {
-        game_loop_manager->pollEvent();
-        game_loop_manager->update();
-        game_loop_manager->render();
-    }
+	while (gameLoop.isGameRunning()) 
+	{
+		gameLoop.pollEvents();
+		gameLoop.update();
+		gameLoop.render();
+	}
 
-    return 0;
+	return 0;
 }
-
