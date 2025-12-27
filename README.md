@@ -8,4 +8,4 @@ Since I'm rendering data/graphics on screen every frame, I used lifecycle functi
 
 The gameplay is super simple, use up and down arrow keys to move the paddle up and down respectively.
 
-Video demo:
+[Click here for a video demo:](https://youtu.be/9BL4ZmCOQ4U)
